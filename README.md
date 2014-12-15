@@ -1,4 +1,4 @@
-yaml_cpp_catkin
+lpsolve_catkin
 ===============
 
-Yaml cpp catkin package
+LpSolve catkin package
