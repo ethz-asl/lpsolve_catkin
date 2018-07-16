@@ -16,11 +16,11 @@ ExternalProject_Add(lpsolve_src
   INSTALL_COMMAND cd ../lpsolve_src && make install -j8 && pwd
 )
 
-cs_add_library(${PROJECT_NAME} src/dependency_tracker.cc)
-add_dependencies(${PROJECT_NAME} lpsolve_src)
-target_link_libraries(${PROJECT_NAME} ${CATKIN_DEVEL_PREFIX}/lib/liblpsolve${CMAKE_SHARED_LIBRARY_SUFFIX})
-
-cs_install()
-
+install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/lp_solve
+        DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
+        FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/lib/
+        DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        FILES_MATCHING PATTERN "liblpsolve*")
 cs_export(INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include
-  CFG_EXTRAS lpsolve-extras.cmake)
+          LIBRARIES lpsolve)
