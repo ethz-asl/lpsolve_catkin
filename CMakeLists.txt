@@ -11,6 +11,7 @@ file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 ExternalProject_Add(lpsolve_src
   URL https://github.com/ethz-asl/thirdparty_library_binaries/raw/master/lp_solve_5.5.2.0_source.tar.gz
   UPDATE_COMMAND ""
+  PATCH_COMMAND patch < ${PROJECT_SOURCE_DIR}/lpsolve.patch
   CONFIGURE_COMMAND cd ../lpsolve_src && pwd && cp ${PROJECT_SOURCE_DIR}/CMakeLists_lpsolve.txt ../lpsolve_src/CMakeLists.txt && cmake -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX} .
   BUILD_COMMAND cd ../lpsolve_src && make -j8
   INSTALL_COMMAND cd ../lpsolve_src && make install -j8 && pwd
